@@ -1,0 +1,552 @@
+Prácticas de linux
+
+Es obligatorio hacer capturas de pantalla de tu consola y pegarlas en tu documento. No sirve con escribir el comando.
+Práctica 1: Matar proceso
+Abre una terminal nueva en tty1 (logueate)
+
+> ctrl + alt + F1
+
+Arranca el editor pico (no lo cierres), editando un fichero llamado fichero.txt
+
+> pico fichero.txt
+
+Abre otra terminal en tty7
+
+> ctrl + alt + F7
+
+Muestra todos los procesos que es están ejecutando en este momento, mira el PID del proceso pico
+
+> ps -a
+
+Mata con el comando adecuado el proceso 'pico' abierto en la terminal tty1
+
+> kill -s KILL xxxx
+
+Comprueba en la terminal tty1 que pico se ha cerrado bruscamente
+
+> ctrl + alt + F1
+
+
+Práctica 2: Programar una tarea que se ejecute dentro de un rato
+
+Usando el comando 'at' programa el borrado de un archivo llamado practica.doc para las 22:00 de la noche
+
+> echo 'rm practica.doc' | at 22:00
+
+Te has equivocado y el fichero que querías borrar era practica.txt. Programa correctamente el borrado del fichero
+
+> echo 'rm practica.txt' | at 22:00
+
+Lista todas las tareas programas con el comando at
+
+> atq
+
+Borra la primera tarea que habías programado
+
+> atrm */id tarea a borrar/*
+
+
+Práctica 3: Programar una tarea persistente en el sistema (aunque se reinicie el ordenador)
+
+Crea un fichero con el editor nano llamado scriptCron.sh en tu HOME
+
+> nano ~/scriptCron.sh
+
+Escribe el siguiente contenido en el fichero
+
+#!/bin/bash
+echo Hola estoy ejecutando una tarea de Cron
+
+Ejecuta el siguiente comando (para dar permisos de ejecución al script)
+
+chmod ugo+x scriptCron.sh
+
+
+>
+
+Programa mediante crontab que ejecute este script todos los días a las 10 de la mañana
+
+>
+
+Verifica el fichero crontab creado
+
+>
+
+
+Práctica 4: Instala una aplicación con APT
+Quieres ejecutar el programa aafire, pero no está instalado en el sistema.
+
+Instala la aplicación libaa-bin usando el gestor de paquetes apt
+
+>
+
+Ejecuta el comando aafire
+
+>
+(termina la aplicación pulsando ctrl+c)
+
+
+Práctica 5: Instala una aplicación con Aptitude
+Quieres ejecutar el programa banner, pero no está instalado en el sistema.
+
+Instala la aplicación sysvbanner usando el gestor de paquetes aptitude
+
+
+>
+
+Ejecuta el comando banner <tu-nombre>
+
+>
+
+
+
+Práctica 5b: convierte a otro formato de empaquetado e instala 
+
+Descarga con wget la aplicación tigervnc
+de la página https://github.com/TigerVNC/tigervnc/archive/v1.9.0.tar.gz
+
+>
+
+Instala con apt el comando alien
+
+>
+
+Convierte el fichero descargado v1.9.0.tar.gz mediante el comando alien al formato .deb
+
+>
+
+Instala con la herramienta dpkg el fichero .deb obtenido en el paso anterior.
+
+>
+
+
+Práctica 6: Comprimir ficheros en un tar
+
+Crea 3 ficheros:
+a.txt
+b.txt
+c.txt
+
+>
+
+Comprime/empaqueta estos 3 fichero en un fichero tar.gz llamado datos.tar.gz
+
+>
+
+Borra los ficheros a.txt, b.txt y c.txt
+
+>
+>
+>
+
+Práctica 7: Descomprime ficheros
+
+Descomprime el contenido del fichero comprimido anterior
+
+>
+
+Comprueba que has recuperado los archivos
+
+>
+
+
+Práctica 8: Instalar un aplicación en formato dev
+
+Quieres descargarte la herramienta de tratamiento de imagen XnConvert
+
+Desgarla de internet la aplicación en formato deb usando el comando wget de la página https://download.xnview.com/XnConvert-linux-x64.deb
+
+>
+
+Una vez tengas el fichero descargado, instalalo.
+
+>
+
+Comprueba en linux mint que la aplicación se ha instalado accediendo al menú -> gráficos
+
+
+
+Práctica 9: Crea un alias
+
+Nos gustaría crear un alias con el nombre acasa que cada vez que se ejecute te lleve a tu home.
+
+>
+
+Por desgracias, al reiniciar el equipo, el alias se borra. Haz que el alias permanezca para siempre en tu máquina, añadiendo el alias al tu ~/.bashrc
+
+>
+
+Añadimos al final de este archivo el siguiente texto (¿Qué pondrías tú?):
+
+>
+Práctica 10: Crea un alias con parámetros
+
+Crea un alias llamado permisos que permita conocer los permisos que tiene un fichero pasado como parámetro. Investiga como pasar parametros a un alias.
+	Ejemplo de uso: permisos fichero.txt
+
+>
+
+
+Práctica 11: Saluda a cualquiera que abra una shell
+
+Deseas que cada vez que alguien (cualquier usuario) abra una shell en tu sistema aparezca una frase tuya ej: Bienvenido al sistema de Angel. Tendrá que modificar un fichero especial del sistema ¿sabes cual?
+
+> sudo pico /etc/bash.bashrc
+
+Al final de este fichero añades:
+	echo Hola esta shell es propiedad de Angel
+
+
+
+Comprueba abriendo una shell nueva
+
+>
+
+Práctica 12: Mensaje personalizado a un usuario cuando inicia sesión
+
+Crea un nuevo usuario llamado jose con password Ad1234
+
+>
+
+Modifica su ~/.bash_profile para que cuando el usuario (solo este usuario) se loguee aparezca el siguiente mensaje:
+Hola Jose, enhorabuena por el nacimiento de tu hija.
+
+>
+
+	Añadimos al final de este archivo el siguiente texto
+			>
+
+
+
+
+Práctica 13: Concatenar comandos
+
+Te gustaría lanzar un ping a una dirección y en el caso de que la dirección esté caída (no responda) mostrar el mensaje "El host está caído". Usa el simbolo adecuado concatenando el comando ping y echo.
+
+> ping www.google.es     echo 'El host está caído'
+
+
+Práctica 14: Realizar un Backup
+
+Por seguridad te gustaría hacer un backup de la carpeta /boot de tu sistema
+
+Instala usando apt la herramienta dump
+
+>
+
+Usando dump, quieres hacer un backup completo (nivel 0) de tu directorio /boot y guardarlo en miBoot.bak. ¿Qué comando usarías?
+
+>
+
+Práctica 15: Añadir un nuevo disco duro al equipo
+Muestra los discos y particiones que tiene tu equipo
+
+>
+
+Apaga tu máquina de Virtual Box
+
+Agrega un nuevo disco duro, para ello:
+accede a la configuración de tu virtual box
+Ve a la sección de Almacenamiento y en la sección controlador: SATA añade un nuevo disco duro
+Reservar dinámicamente
+Tamaño de unos 20 megas
+Enciende tu máquina
+
+Vuelve a mostrar los discos y particiones de tu sistema para observar que tienes un nuevo disco duro.
+
+> 
+
+
+
+Práctica 16: Crea 2 particiones nuevas en el disco
+El nuevo disco insertado no posee ni tabla de particiones, ni está particionado, ni formateado.
+Vamos a crear 2 particiones nuevos en este disco.
+
+Arranca el gestor de particiones fdisk sobre el segundo disco duro
+
+>
+
+Crea una tabla de particiones vacía de tipo GPT
+
+> 
+> tecla ?
+
+Crea una partición de 10 MiB de tamaño
+
+> tecla ?
+
+Crea otra partición con el resto de espacio disponible (unos 10MiB)
+
+>tecla ?
+
+Guarda los cambios
+
+>tecla ?
+
+
+Práctica 17: Tetris: Descarga el código fuente de una aplicación, compílala, instálala y ejecutala
+
+Visualiza un ejemplo parecido https://docs.google.com/presentation/d/1fUVjDS5GO1dVguzsm8RiNrxN4pgSbtZZ_Izwvx8Qsp0/edit?usp=sharing
+
+
+Vamos a descargar, compilar y jugar al juego tetris a partir de su código fuente.
+
+Partimos de que el código fuente del tetris está subido a github. Clona el siguiente repositorio en tu máquina usando el comando git
+https://github.com/vicgeralds/vitetris
+
+> 
+
+Entra en la nueva carpeta que se ha creado
+
+> 
+
+Compila el código fuente (necesitarás 3 comandos)
+
+> 
+> 
+> 
+
+Ejecuta el juego (puedes jugar un rato si quieres)
+
+> 
+
+
+
+Práctica 18: Instala una aplicación con entorno gráfico
+
+Necesitas un programa de retoque fotográfico al estilo photoshop. Instala gimp en tu sistema.
+
+> 
+
+Usalo un poco...
+
+
+Ya has terminado de trabajar con gimp, ahora vamos a desinstalarlo
+
+> 
+
+
+Práctica 19: Envíate un email desde linux
+
+Instala la herramienta mailutils
+
+> 
+
+Envíate (a ti mismo o a un compañero) un email usando el comando mail (investiga por internet su uso)
+
+> 
+
+Comprueba tu bandeja de entrada (seguramente te ha llegado al la bandeja de spam revísala)
+
+
+Práctica 20: Actualiza tu linux
+
+Queremos hacer una actualización de nuestro sistema con todas las posibles actualizaciones que pudiera haber, es decir no sólo actualiza nuestro sistema operativo sino que también las aplicaciones que están contenidas en los repositorios.
+
+>
+
+
+
+Práctica 21: Envia mensajes en línea a otros usuarios conectados
+
+Crea un nuevo usuario llamado Ana
+
+> 
+
+Logueate en tty1 con ese usuario
+
+> 
+
+Por defecto este usuario tendrá desactivado la recepción de mensajes. Activa la recepción de mensajes con el comando mesg (investiga)
+
+>
+
+Vuelve a la terminal 7 (tty7)
+
+> 
+
+Envía un mensaje de tipo broadcast a todos los usuarios con el comando wall (investiga). El mensaje dirá: el sistema se reiniciará a las 22:00
+
+
+> 
+
+Comprueba si le llegó el mensaje
+
+Envía ahora un mensaje a ana que está en la terminal tty1, usando el comando write 
+
+> 
+
+Comprueba si le llegó el mensaje
+
+
+
+Práctica 22: Navega por internet en modo texto
+
+Necesitas saber que programa echan esta noche en la Sexta. 
+
+Navega por internet a la página www.teletexto.com y consúltalo… pero… tu sistema no tiene soporte para ventanas y tendrás que navegar en modo texto.
+
+Descarga alguna aplicación que permite navegar por internet en modo texto. (lynx, W3M, Links, Elinks, ....)
+
+> 
+
+Navega en busca de la información
+
+> 
+
+
+Práctica 23: Conectarte a un ordenador vía ssh
+Sdf.org te permite crear un servidor en sus ordenadores y conectarte remotamente a ellos.
+
+Crea una cuenta en la página https://sdf.org/
+>
+
+Conectate desde tu ordenador mediante ssh a sus ordenadores
+>
+
+Crea un fichero de texto usando un editor
+>
+
+
+
+Práctica 24: Formatea la segunda partición de tu segundo disco duro
+
+En los ejercicios anteriores se te pidió que añadieses un segundo disco duro y lo particionaras en 2 trozos.
+
+Ahora vamos a formatear:
+la primera partición de tu disco duro con es sistema ext3
+>
+la segunda partición con el sistema NTFS
+>
+
+
+
+Práctica 25: Monta las particiones en tu sistema
+
+Te gustaría, que la primera y segunda partición de tu segundo disco esté accesible en tu equipo, para que puedas guardar archivos en ella.
+
+
+Monta la 1ª partición de tu segundo disco duro en una carpeta de tu home llamada HD1
+>
+Monta la 2ª partición de tu segundo disco duro en una carpeta de tu home llamada HD2
+>
+
+
+Práctica 27: Gestiona usuarios y grupos
+Crea un usuario en tu máquina:
+Nombre: felipe
+Nombre completo: Felipe Gomez Ria
+Clave: Ad1234
+
+>
+
+Configura el usuario para que su clave caduque en agosto
+
+>
+
+Crea un grupo nuevo llamado trabajadores
+
+>
+
+Asocia el usuario Felipe al grupo de los trabajadores
+
+>
+
+Crea un archivo llamado factura.txt (usando comandos de redirección)
+
+>
+
+Haz que este fichero le pertenezca al usuario Felipe y al grupo trabajadores
+
+>
+>
+
+Pon los permisos al usuarios de:
+El usuario propietario puede leer, escribir y ejecutar
+El grupo solo puede leer y ejecutar
+Los otros no podrán hacer nada
+
+Hazlo usando notación octal
+>
+
+Hazlo usando notación simbolica
+>
+
+
+Ponle el atributo especial sticky al fichero
+>
+
+
+Practica 28: Creando una imagen de un pendrive/sd/cd/etc
+Tienes un sistema operativo o datos importantes en tu pendrive, y quieres hacer una imagen exacta a modo de backup de esa información
+Primero desconecta tu pendrive
+Lanza el comando adecuado para ver los dispositivos conectados al equipo ej: df -h
+> 
+Conecta el pendrive y vuelve a lanzar el mismo comando
+> 
+Mira cual es el nombre de ese dispositivo deberá comenzar por /dev/…
+Crea la imagen usando el comando dd
+> 
+
+Practica 29: Restaura la imagen que has creado en el paso anterior.
+Imagina que borrar o formatear "sin querer" el pendrive a fat32
+> 
+
+Ahora vuelve a restaurar la imagen en tu pendrive
+Para ello desmonta las particiones de tu pendrive
+> 
+
+Y escribe de nuevo los datos en tu pendrive. Usando el comando dd
+
+> 
+
+
+Antes de retirar el pendrive es una buena práctica ejecutar: sudo sync
+
+
+
+Práctica 30: Acceso a tus discos duros de Windows usando SAMBA
+
+Comparte desde tu windows alguna carpeta.
+
+Ahora desde tu linux, accede a los recursos de esa carpeta de windows
+> 
+
+
+
+Práctica 31: crea un disco duro virtual (en virtualbox) de 30GB
+> 
+
+
+
+Práctica 32: Instala un linux en tu equipo.
+
+Te gustaría que tu ordenador tenga 2 sistemas operativos instalados (Windows 10 y Linux) mediante dual-bot 
+(que te pregunte al arrancar el ordenador cuál de los 2 sistemas operativos vas a usar)
+
+0- Haz una copia de seguridad de los datos importantes guardados en Windows.
+
+1- En windows tenemos que dejar un poco de espacio para el nuevo sistema operativo. Accede al administrador de discos de windows y usando la opción Reducir Volumen.
+Liberamos unos cuantos gigas (20 o 30 GB)
+
+3- Investiga un poco sobre la mejor distribución de linux para un programador/ora. Yo recomiendo... 
+Debian: muy estable
+Fedora: la preferida de Linus Torvalds
+Arch Linux: solo instalas los paquetes necesarios
+CentOS: con mucha experiencia de desarrollo
+Mint: de propósito general
+Ubuntu: de propósito general
+
+2- Descarga la ISO del sistema operativo a instalar (de su página oficial)
+
+3- Quema la iso en un pendrive. Puedes usar cualquiera de estos programas
+Rufus
+UNetbootin
+Yumi
+Iso2USB
+
+4- Enchufa el usb y reinicia el equipo. Pulsa la tecla adecuada de tu ordenador para arrancar desde el USB (suele ser el F12, F10, F2,...)
+
+5- Procede a instalar el nuevo sistema operativo linux en la partición creada en el paso 1. Es muy importante que selecciones correctamente la partición, de lo contrario perderás todos los datos guardados en Windows.
+
+6- Listo, la próxima vez que arranques tu ordenador podrás elegir entre arrancar Windows o Linux (mediante GRUB)

@@ -1,0 +1,72 @@
+---------------------------------------- QUÉ HACE----------------------------------------
+> cat info.txt | grep -P '\d$'
+	-P es para que coja las expresiones regulares sin problemas
+	muestra en el fichero todo lo que termine en dígito (\d)
+
+Guarda en el fichero info.txt las últimas 4 líneas de datos.txt
+	>tail -n 4 datos.txt > info.txt
+	'>' destruye todo lo del fichero y guarda solo las 4 líneas
+	'>>' las guarda al final
+
+Si la creación del usuario Manuel tiene éxito, guarda el fichero log.txt 'usuario creado correctamente'
+con la fecha de hoy. Usa una sola línea
+	>sudo adduser Manuel && (echo "usuario creado correctamente" ; date) >> log.txt
+
+¿Qué tipos de cables hay?
+	Coaxial, trenzado, fibra
+
+¿Para que sirve un switch?
+	Para conectar varios nodos a una misma red
+
+Crea un fichero y dale permisos de:
+-Al ususario propietario: lectura y escritura
+-Al grupo: ejecicion
+-Al resto: ninguno
+	>sudo chmod 610 fichero.txt
+	>sudo chmod a-rwx u+rw g+x gichero.txt
+		all (a) quitamos todos
+		user (u) damos read and write
+		group (g) damos execute
+
+Listar users / groups creados
+	>cat /etc/passwd
+
+Cuenta cuantos caracteres tiene el fichero info.txt.
+Guarda el resultado en la ruta repo/log.txt de tu home
+	>wc -c info.txt > ~/repo/log.txt
+	>wc -c info.txt > $HOME/repo/log.txt
+
+Indica cuantas veces se repite la palabra 'china' o 'chino' en
+el fichero report.txt
+	>grep -Pco 'chin[ao]' report.txt
+	>grep -Pco 'chino|china' report.txt
+		-P para la regex, -c para contar, -o para solo lo que coincida
+
+Indica las lineas que NO contengan la parabra 'Rusia'
+	>grep -Piv 'rusia' fichero.txt
+		-v selecciona lo que no coincide, -i ignore_case
+
+Copia el fichero situado en /etc/prop/dato.txt a la carpeta cebem de tu home
+	>cp /etc/prop/dato.txt ~/cebem
+	>cp /etc/prop/dato.txt $HOME/cebem
+
+Borra la carpeta cebem de tu home y todo su contenido
+	>sudo rm -rf ~/cebem
+
+Como puedo saber si el último comando que lancé se ejecutó correctamente
+	>echo $?
+		Si devuelve 0 se ejecutó correctamente
+
+Une los ficheros a.txt y b.txt en uno llamado c.txt,
+pero solo las 5 primeras lineas de a.txt y las 5 ultimas de b.txt
+	>(head -n 5 a.txt ; tail -n 5 b.txt) > c.txt
+
+Escribe una ruta absoluta
+	/etc/passwd
+
+Descarga usando ssh el fichero datos.txt de la máquina 192.168.1.33
+logeandote como alumno
+	>scp alumno@192.168.1.33:/datox.txt
+
+Guarda en log.txt el espacio libre que tienes en el disco duro principal
+	>df -h /dev/sda >> log.txt
